@@ -1,11 +1,15 @@
 class QueriesController < ApplicationController
+  def last_update
+    render json: MetaData.first.updated_at
+  end
+
   # Returns 'true' or 'false'
   def has_new_data
     since = params[:since]
 
-    n = Visit.where("Date_Of_Visit > ?", since).count
+    n = Visit.where("Date_Of_Visit > ? AND Visit_Flag = 1", since).count
     n += Beneficiary.where("Date_Of_Update > ?" , since).count
-    n += ExcludeLog.where("Date_Of_Exclude > ?", since).count
+    n += ExcludeLog.where("Date_Of_Exclude > ?", since).count # check if date in beneficiaries table is set to null if participant is included again. If yes then use date + flag to check.
     n += EnrollmentData.where("Date_Of_Enrollment > ?", since).count
 
     render json: (n > 0)
