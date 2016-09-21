@@ -1,18 +1,19 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
+development:
   adapter: mysql2
   encoding: utf8
+  database: prevac_mqi
   pool: 5
   host: localhost
   username: root
   password: root
   socket: /tmp/mysql.sock
 
-development:
-  <<: *default
-  database: prevac_mqi
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: prevac_mqi_prod
+  pool: 5
+  host: localhost
+  username: root
+  password: root
+  socket: /var/run/mysqld/mysqld.sock
