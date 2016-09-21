@@ -1,4 +1,8 @@
 class QueriesController < ApplicationController
+  def ping
+    render json: "pong"
+  end
+
   def last_update
     render json: MetaData.first.updated_at
   end
