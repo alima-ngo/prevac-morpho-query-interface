@@ -28,5 +28,12 @@ module PrevacMorphoQueryInterface
     config.api_only = true
 
     config.active_record.time_zone_aware_types = [:datetime]
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 end
