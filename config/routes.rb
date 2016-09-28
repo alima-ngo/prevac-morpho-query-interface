@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'ping', to: "queries#ping"
 
-  get 'queries/last_update', to: "queries#last_update"
+  get 'queries/last_migration', to: "queries#last_migration"
 
   get 'queries/new_participants/:since', to: "queries#new_participants"
 

@@ -3,8 +3,13 @@ class QueriesController < ApplicationController
     render json: "pong"
   end
 
-  def last_update
-    render json: MetaData.first.updated_at
+  def last_migration
+    if ActiveRecord::Base.connection.data_source_exists? 'ar_internal_metadata'
+      d = MetaData.first.updated_at
+    else
+      d = "2016-01-01" # An arbitrary date in the past
+    end
+    render json: d
   end
 
   # Returns 'true' or 'false'
