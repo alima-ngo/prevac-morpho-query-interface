@@ -21,3 +21,5 @@
 .byebug_history
 
 /db/structure.sql
+
+/config/secrets.yml
